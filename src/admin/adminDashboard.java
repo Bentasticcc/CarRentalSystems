@@ -5,10 +5,20 @@
  */
 package admin;
 
+import carrental4.createUserForm;
 import carrental4.loginForm;
 import config.Session;
+import config.dbConnector;
 import java.awt.Color;
+import static java.awt.Color.red;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -47,18 +57,9 @@ public class adminDashboard extends javax.swing.JFrame {
         c_name = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        r_name = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         a_name = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        b_name = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        t_name = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -163,48 +164,6 @@ public class adminDashboard extends javax.swing.JFrame {
         c_name.add(jLabel10);
         jLabel10.setBounds(8, 79, 90, 20);
 
-        r_name.setBackground(new java.awt.Color(255, 255, 255));
-        r_name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                r_nameMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                r_nameMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                r_nameMouseExited(evt);
-            }
-        });
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-report-50.png"))); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("REPORTS");
-
-        javax.swing.GroupLayout r_nameLayout = new javax.swing.GroupLayout(r_name);
-        r_name.setLayout(r_nameLayout);
-        r_nameLayout.setHorizontalGroup(
-            r_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(r_nameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(r_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(r_nameLayout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        r_nameLayout.setVerticalGroup(
-            r_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(r_nameLayout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addGap(29, 29, 29)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
-        );
-
         a_name.setBackground(new java.awt.Color(255, 255, 255));
         a_name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -220,9 +179,15 @@ public class adminDashboard extends javax.swing.JFrame {
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-car-rental-50.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("AVAILABLE CARS");
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("UPDATE CARS");
 
         javax.swing.GroupLayout a_nameLayout = new javax.swing.GroupLayout(a_name);
         a_name.setLayout(a_nameLayout);
@@ -230,11 +195,8 @@ public class adminDashboard extends javax.swing.JFrame {
             a_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, a_nameLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(a_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(a_nameLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         a_nameLayout.setVerticalGroup(
             a_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,118 +207,25 @@ public class adminDashboard extends javax.swing.JFrame {
                 .addComponent(jLabel6))
         );
 
-        b_name.setBackground(new java.awt.Color(255, 255, 255));
-        b_name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                b_nameMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                b_nameMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                b_nameMouseExited(evt);
-            }
-        });
-
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-car-rental-50.png"))); // NOI18N
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("BOOK CARS");
-
-        javax.swing.GroupLayout b_nameLayout = new javax.swing.GroupLayout(b_name);
-        b_name.setLayout(b_nameLayout);
-        b_nameLayout.setHorizontalGroup(
-            b_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(b_nameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(b_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        b_nameLayout.setVerticalGroup(
-            b_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, b_nameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel12))
-        );
-
-        t_name.setBackground(new java.awt.Color(255, 255, 255));
-        t_name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                t_nameMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                t_nameMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                t_nameMouseExited(evt);
-            }
-        });
-
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-transactions-32.png"))); // NOI18N
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("TRANSACTIONS");
-
-        javax.swing.GroupLayout t_nameLayout = new javax.swing.GroupLayout(t_name);
-        t_name.setLayout(t_nameLayout);
-        t_nameLayout.setHorizontalGroup(
-            t_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, t_nameLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(t_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-        );
-        t_nameLayout.setVerticalGroup(
-            t_nameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, t_nameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14))
-        );
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(113, 113, 113)
                 .addComponent(a_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(b_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(69, 69, 69)
                 .addComponent(c_name, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(r_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(t_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(b_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(a_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(r_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(c_name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
-                .addComponent(t_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(a_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(c_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -419,24 +288,8 @@ public class adminDashboard extends javax.swing.JFrame {
         c_name.setBackground(navcolor);
     }//GEN-LAST:event_c_nameMouseExited
 
-    private void r_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r_nameMouseClicked
-        usersReports usr = new usersReports();
-        usr.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_r_nameMouseClicked
-
-    private void r_nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r_nameMouseEntered
-        r_name.setBackground(hovercolor);
-    }//GEN-LAST:event_r_nameMouseEntered
-
-    private void r_nameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r_nameMouseExited
-        r_name.setBackground(navcolor);
-    }//GEN-LAST:event_r_nameMouseExited
-
     private void a_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_nameMouseClicked
-        availCars avc = new availCars();
-        avc.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_a_nameMouseClicked
 
     private void a_nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_nameMouseEntered
@@ -447,33 +300,11 @@ public class adminDashboard extends javax.swing.JFrame {
         a_name.setBackground(navcolor);
     }//GEN-LAST:event_a_nameMouseExited
 
-    private void b_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_nameMouseClicked
-        bookCars bcs = new bookCars();
-        bcs.setVisible(true);
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        carForm cor = new carForm();
+        cor.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_b_nameMouseClicked
-
-    private void b_nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_nameMouseEntered
-        b_name.setBackground(hovercolor);
-    }//GEN-LAST:event_b_nameMouseEntered
-
-    private void b_nameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_nameMouseExited
-        b_name.setBackground(navcolor);
-    }//GEN-LAST:event_b_nameMouseExited
-
-    private void t_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_nameMouseClicked
-        tranSactions tss = new tranSactions();
-        tss.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_t_nameMouseClicked
-
-    private void t_nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_nameMouseEntered
-        t_name.setBackground(hovercolor);
-    }//GEN-LAST:event_t_nameMouseEntered
-
-    private void t_nameMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_nameMouseExited
-        t_name.setBackground(navcolor);
-    }//GEN-LAST:event_t_nameMouseExited
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -514,25 +345,16 @@ public class adminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel a_name;
     private javax.swing.JLabel acc_lname;
     private javax.swing.JLabel acc_name;
-    private javax.swing.JPanel b_name;
     private javax.swing.JPanel c_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel r_name;
-    private javax.swing.JPanel t_name;
     // End of variables declaration//GEN-END:variables
 }

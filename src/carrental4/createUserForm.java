@@ -97,6 +97,29 @@ public class createUserForm extends javax.swing.JFrame {
         return image;
     }
     
+        public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
+    
     public boolean duplicateCheck(){
         
     dbConnector dbc = new dbConnector();
@@ -324,7 +347,7 @@ public class createUserForm extends javax.swing.JFrame {
 
         image.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(image);
-        image.setBounds(10, 10, 200, 190);
+        image.setBounds(10, 10, 210, 190);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -512,9 +535,19 @@ public class createUserForm extends javax.swing.JFrame {
         dbConnector dbc = new dbConnector();
         dbc.updateData("UPDATE tbl_user SET u_fname = '"+fn.getText()+"', u_lname = '"+ln.getText()+"', "
                 + "u_email = '"+em.getText()+"', u_name = '"+un.getText()+"', u_pass = '"+ps.getText()+"', "
-                        + "u_type = '"+ut.getSelectedItem()+"', u_status = '"+us.getSelectedItem()+"'"
-                                + "WHERE u_id = '"+uid.getText()+"'");
+                + "u_type = '"+ut.getSelectedItem()+"', u_status = '"+us.getSelectedItem()+"', u_image ='"+destination+"' WHERE u_id = '"+uid.getText()+"'");
+
         
+        if(destination.isEmpty()){
+            File existingFile = new File(oldpath);
+            if(existingFile.exists()){
+                existingFile.delete();
+            }else{
+                if(!(oldpath.equals(path))){
+                    imageUpdater(oldpath,path);
+                }
+            }
+        }
         usersForm uf = new usersForm();
         uf.setVisible(true);
         this.dispose();
@@ -629,8 +662,8 @@ public class createUserForm extends javax.swing.JFrame {
     public javax.swing.JTextField ln;
     public javax.swing.JTextField ps;
     private javax.swing.JButton refresh;
-    private javax.swing.JButton remove;
-    private javax.swing.JButton select;
+    public javax.swing.JButton remove;
+    public javax.swing.JButton select;
     public javax.swing.JTextField uid;
     public javax.swing.JTextField un;
     public javax.swing.JButton update;
