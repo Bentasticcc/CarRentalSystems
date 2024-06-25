@@ -231,16 +231,14 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel11" max="32767" attributes="0"/>
-                              <Component id="jLabel9" max="32767" attributes="0"/>
+                              <Component id="jLabel9" pref="133" max="32767" attributes="0"/>
                               <Component id="jLabel4" max="32767" attributes="0"/>
                               <Component id="jLabel8" max="32767" attributes="0"/>
-                              <Component id="jLabel3" pref="133" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="cm" min="-2" pref="201" max="-2" attributes="0"/>
                               <Component id="fs" min="-2" pref="201" max="-2" attributes="0"/>
-                              <Component id="cun" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                               <Component id="cid" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                               <Component id="cn" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
@@ -257,11 +255,7 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel3" max="32767" attributes="0"/>
-                              <Component id="cun" pref="30" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="cid" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -296,11 +290,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Enter Customer Name:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enter Car&apos;s ID:"/>
@@ -320,11 +309,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Fee&apos;s Amount:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="cun">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="cid">
           <AuxValues>

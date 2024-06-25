@@ -46,9 +46,6 @@ public class usersDashboard extends javax.swing.JFrame {
         u_name = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cars = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         cars1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -150,31 +147,6 @@ public class usersDashboard extends javax.swing.JFrame {
         u_name.add(jLabel10);
         jLabel10.setBounds(11, 79, 80, 17);
 
-        cars.setBackground(new java.awt.Color(255, 255, 255));
-        cars.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carsMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                carsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                carsMouseExited(evt);
-            }
-        });
-        cars.setLayout(null);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("CAR ORDERS");
-        cars.add(jLabel6);
-        jLabel6.setBounds(5, 80, 130, 17);
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-car-rental-50.png"))); // NOI18N
-        cars.add(jLabel5);
-        jLabel5.setBounds(10, 0, 120, 50);
-
         cars1.setBackground(new java.awt.Color(255, 255, 255));
         cars1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -209,9 +181,7 @@ public class usersDashboard extends javax.swing.JFrame {
                 .addComponent(cars1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(u_name, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cars, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +189,6 @@ public class usersDashboard extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cars1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cars, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(u_name, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -283,20 +252,6 @@ public class usersDashboard extends javax.swing.JFrame {
         u_name.setBackground(navcolor);
     }//GEN-LAST:event_u_nameMouseExited
 
-    private void carsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carsMouseClicked
-        tranSactions crf = new tranSactions();
-        crf.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_carsMouseClicked
-
-    private void carsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carsMouseEntered
-        cars.setBackground(hovercolor);
-    }//GEN-LAST:event_carsMouseEntered
-
-    private void carsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carsMouseExited
-        cars.setBackground(navcolor);
-    }//GEN-LAST:event_carsMouseExited
-
     private void cars1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cars1MouseClicked
         customerForm as = new customerForm();
         as.setVisible(true);
@@ -349,15 +304,12 @@ public class usersDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acc_name;
-    private javax.swing.JPanel cars;
     private javax.swing.JPanel cars1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

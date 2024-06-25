@@ -289,7 +289,9 @@ public class adminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_c_nameMouseExited
 
     private void a_nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_nameMouseClicked
-
+        carForm cor = new carForm();
+        cor.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_a_nameMouseClicked
 
     private void a_nameMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a_nameMouseEntered
@@ -301,9 +303,7 @@ public class adminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_a_nameMouseExited
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        carForm cor = new carForm();
-        cor.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**

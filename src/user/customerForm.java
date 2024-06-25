@@ -5,7 +5,7 @@
  */
 package user;
 
-import admin.orderForm;
+
 import admin.*;
 import carrental4.loginForm;
 import config.Session;
@@ -188,10 +188,7 @@ public class customerForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        orderForm of = new orderForm();
-        JOptionPane.showMessageDialog(null, "Logout Success!");
-        of.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -203,10 +200,7 @@ public class customerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_oTableMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        orderForm of = new orderForm();
-        JOptionPane.showMessageDialog(null, "Logout Success!");
-        of.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -216,11 +210,10 @@ public class customerForm extends javax.swing.JFrame {
         }else{
             TableModel model = oTable.getModel();
             tranSactions of = new tranSactions();
-            of.cun.setText(""+model.getValueAt(rowIndex, 0));
-            of.cid.setText(""+model.getValueAt(rowIndex, 1));
-            of.cn.setText(""+model.getValueAt(rowIndex, 2));     
-            of.cm.setText(""+model.getValueAt(rowIndex, 3));  
-            of.fs.setText(""+model.getValueAt(rowIndex, 4));
+            of.cid.setText(""+model.getValueAt(rowIndex, 0));
+            of.cn.setText(""+model.getValueAt(rowIndex, 1));     
+            of.cm.setText(""+model.getValueAt(rowIndex, 2));  
+            of.fs.setText(""+model.getValueAt(rowIndex, 3));
             of.setVisible(true);
             this.dispose();
             of.setVisible(true);
